@@ -14,17 +14,25 @@
     push();
     // The first branch starts at the
     // bottom of the window.
-    translate(width/2, height);
-    stroke(0, 31, 63);
+    translate(width * 0.25, height);
+    stroke(0, 0, 255);
     //branch(160,6);
     branch(140, theta1, theta2);
+    pop();
 
-    pop()
-    translate(width/4, height);
-    stroke(0);
+    push();
+    translate(width * 0.5, height);
+    stroke(0, 255, 0);
     //branch(160,6);
     branch(140, theta1, theta2);
+    pop();
 
+    push();
+    translate(width * 0.75, height);
+    stroke(255, 0, 0);
+    //branch(160,6);
+    branch(140, theta1, theta2);
+    pop();
   }
 
   // Each branch now receives
