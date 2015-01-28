@@ -6,6 +6,8 @@
       middleY  = 0,
       ringX    = 0,
       ringY    = 0,
+      palmX    = 0,
+      palmY    = 0,
       frame,
       appWidth = 1260,
       appHeight= 640;
@@ -16,14 +18,15 @@
 
   function draw() {
     background(127, 219, 255);
-
+    console.log(palmX, palmY);
     // save off initial state
     push();
 
     // The first branch starts at the
     // bottom of the window.
-    var theta1 = map(indexX, 0, width, 0, PI/2),
-        theta2 = map(indexY, 0, height, 0, PI/2);
+    var theta1 = map(palmX, 0, width, 0, PI/2),
+        theta2 = map(palmY, 0, height, 0, PI/2);
+
     translate(width * 0.25, height);
     stroke(0, 0, 255);
     //branch(160,6);
@@ -31,8 +34,8 @@
     pop();
 
     push();
-    theta1 = map(middleX, 0, width, 0, PI/2);
-    theta2 = map(middleY, 0, height, 0, PI/2);
+//    theta1 = map(middleX, 0, width, 0, PI/2);
+//    theta2 = map(middleY, 0, height, 0, PI/2);
     translate(width * 0.5, height);
     stroke(0, 255, 0);
     //branch(160,6);
@@ -40,8 +43,8 @@
     pop();
 
     push();
-    theta1 = map(ringX, 0, width, 0, PI/2);
-    theta2 = map(ringY, 0, height, 0, PI/2);
+//    theta1 = map(ringX, 0, width, 0, PI/2);
+//    theta2 = map(ringY, 0, height, 0, PI/2);
     translate(width * 0.75, height);
     stroke(255, 0, 0);
     //branch(160,6);
@@ -97,10 +100,19 @@
           normalizedPoint;
       // console.log('ibox', iBox);
       if(frame.hands[0]){
+        var hand = frame.hands[0];
+
+        leapPoint = hand.stabilizedPalmPosition;
+        normalizedPoint = iBox.normalizePoint(leapPoint, true);
+        palmX = normalizedPoint[0] * appWidth;
+        palmY = (1 - normalizedPoint[1]) * appHeight;
+      }
+    /*
         var hand = frame.hands[0],
             fingers = hand.fingers.filter(function(f){
               return f.type === 1 || f.type === 2 || f.type === 3;
             });
+        console.log(hand.stabilizedPalmPosition);
         fingers.forEach(function(f){
           switch(f.type){
             case 1:
@@ -125,6 +137,7 @@
         });
       };
       // document.getElementById('leap-output').innerHtml = '';
+      */
     },
     hand: function(hand){
     }
