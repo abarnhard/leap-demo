@@ -18,8 +18,9 @@
 
   function draw() {
     background(127, 219, 255);
-    console.log(palmX, palmY);
+    // console.log(palmX, palmY);
     // save off initial state
+    strokeWeight(2);
     push();
 
     // The first branch starts at the
@@ -104,8 +105,9 @@
 
         leapPoint = hand.stabilizedPalmPosition;
         normalizedPoint = iBox.normalizePoint(leapPoint, true);
-        palmX = normalizedPoint[0] * appWidth;
-        palmY = (1 - normalizedPoint[1]) * appHeight;
+        palmX = Math.floor(normalizedPoint[0] * appWidth);
+        palmY = Math.floor((1 - normalizedPoint[1]) * appHeight);
+        // console.log(palmX, palmY);
       }
     /*
         var hand = frame.hands[0],
